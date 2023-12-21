@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@acamia/application": ["lib/api/application/src/index.ts"],
+      "@acamia/backend-common": ["lib/backend/common/src/index.ts"],
+      "@acamia/course": ["lib/backend/domain/course/src/index.ts"],
+      "@acamia/department": ["lib/backend/domain/department/src/index.ts"],
+      "@acamia/entities": ["lib/backend/domain/entities/src/index.ts"],
+      "@acamia/professor": ["lib/backend/domain/professor/src/index.ts"],
+      "@acamia/school": ["lib/backend/domain/school/src/index.ts"],
+      "@acamia/user": ["lib/backend/domain/user/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
