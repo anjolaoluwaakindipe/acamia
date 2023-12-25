@@ -33,21 +33,22 @@ export class SchoolService implements ISchoolService {
   async updateSchool(
     command: UpdateSchoolCommand
   ): Promise<UpdateSchoolResult> {
-    const existingSchool = this.schoolRepository.findSchoolById(command.id);
+    const existingSchool = await this.schoolRepository.findSchoolById(
+      command.id
+    );
 
     if (existingSchool === null) {
       throw new NotFoundException(
         `School with id ${command.id} does not exist`
       );
     }
-    const newSchool = School.create({
-      id: command.id,
-      name: command.name,
-      city: command.city,
-      stateOrProvince: command.stateOrProvince,
-      country: command.country,
-    });
-    const result = await this.schoolRepository.updateSchool(newSchool);
+    existingSchool.name = command.name;
+    existingSchool.city = command.city;
+    existingSchool.description = command.description;
+    existingSchool.stateOrPronvince = command.stateOrProvince;
+    existingSchool.country = command.country;
+
+    const result = await this.schoolRepository.updateSchool(existingSchool);
 
     return {
       id: result.id,
@@ -56,10 +57,6 @@ export class SchoolService implements ISchoolService {
       city: result.city,
       stateOrProvince: result.stateOrPronvince,
       country: result.country,
-      domains: result.domains.map((domain) => ({
-        id: domain.id,
-        domain: domain.domain,
-      })),
     };
   }
 
@@ -101,13 +98,16 @@ export class SchoolService implements ISchoolService {
   async getAllDomains(
     query: GetDomainsBySchoolIdQuery
   ): Promise<GetDomainsBySchoolIdResult> {
-    const existingSchool = await this.schoolRepository.findSchoolById(query);
+    let existingSchool = await this.schoolRepository.findSchoolById(query);
 
     if (existingSchool == null) {
       throw new NotFoundException(`School with id ${query} does not exist`);
     }
 
-    return existingSchool.domains.map((domain) => ({
+    existingSchool = null;
+    const result = await this.schoolRepository.getAllDomainsBySchoolId(query);
+
+    return result.map((domain) => ({
       domain: domain.domain,
       id: domain.id,
     }));

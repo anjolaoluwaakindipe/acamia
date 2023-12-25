@@ -7,8 +7,6 @@
   "devDependencies": {
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
-    "@nx-go/nx-go": "^2.8.0",
-    "@nx-golang/gin": "^0.7.0",
     "@nx/eslint": "17.1.3",
     "@nx/eslint-plugin": "17.1.3",
     "@nx/jest": "17.1.3",
@@ -48,7 +46,6 @@
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "sqlite3": "^5.1.6",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.17",
     "uuid": "^9.0.1"

@@ -176,9 +176,9 @@ describe('SCHOOL REPOSITORY TEST', () => {
     test('SHOULD return a school WHEN a valid id is given', async () => {
       const result = await schoolRepository.findSchoolById(newSchools[0].id);
       expect(result).not.toBeNull();
-      expect(result?.name).toStrictEqual(newSchools[0].name);
-      expect(result?.description).toStrictEqual(newSchools[0].description);
-      expect(result?.city).toStrictEqual(newSchools[0].city);
+      expect(result?.name).toBe(newSchools[0].name);
+      expect(result?.description).toBe(newSchools[0].description);
+      expect(result?.city).toBe(newSchools[0].city);
     });
 
     test('SHOULD return null WHEN an invalid id is given', async () => {
@@ -337,16 +337,14 @@ describe('SCHOOL REPOSITORY TEST', () => {
       expect(foundDomain?.domain).toBe(newDomains[0].domain);
     });
 
-    test('SHOULD return  null WHEN given an invalid ID', async ()=>{
-      const foundDomain = await schoolRepository.findSchoolDomainById(
-        uuidv4()
-      );
+    test('SHOULD return  null WHEN given an invalid ID', async () => {
+      const foundDomain = await schoolRepository.findSchoolDomainById(uuidv4());
 
-      expect(foundDomain).toBeNull()
-    })
+      expect(foundDomain).toBeNull();
+    });
   });
 
-  describe("updateSchool", ()=>{
+  describe('updateSchool', () => {
     let newSchool: School;
     beforeEach(async () => {
       newSchool = School.create({
@@ -359,19 +357,19 @@ describe('SCHOOL REPOSITORY TEST', () => {
       newSchool = await schoolRepository.saveSchool(newSchool);
     });
 
-    test("SHOULD update a school WHEN given an existing school", async()=>{
-      newSchool.city = "Chicago"
-      newSchool.country = "United States of America"
-      newSchool.stateOrPronvince = "Illinois"
-      newSchool.name ="Illinois State University"
+    test('SHOULD update a school WHEN given an existing school', async () => {
+      newSchool.city = 'Chicago';
+      newSchool.country = 'United States of America';
+      newSchool.stateOrPronvince = 'Illinois';
+      newSchool.name = 'Illinois State University';
 
-      const updatedSchool = await schoolRepository.updateSchool(newSchool)
+      const updatedSchool = await schoolRepository.updateSchool(newSchool);
 
-      expect(updatedSchool.id).toBe(newSchool.id)
-      expect(updatedSchool.city).toBe(newSchool.city)
-      expect(updatedSchool.country).toBe(newSchool.country)
-      expect(updatedSchool.stateOrPronvince).toBe(newSchool.stateOrPronvince)
-      expect(updatedSchool.name).toBe(newSchool.name)
-    })
-  })
+      expect(updatedSchool.id);
+      expect(updatedSchool.city).toBe(newSchool.city);
+      expect(updatedSchool.country).toBe(newSchool.country);
+      expect(updatedSchool.stateOrPronvince).toBe(newSchool.stateOrPronvince);
+      expect(updatedSchool.name).toBe(newSchool.name);
+    });
+  });
 });

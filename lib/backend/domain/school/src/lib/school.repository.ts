@@ -64,7 +64,7 @@ export class SchoolRepository implements ISchoolRepository {
       schoolDomain.id = uuidv4();
     }
     school.addDomain(schoolDomain);
-    return await this.schoolDomainRepo.save(schoolDomain,);
+    return await this.schoolDomainRepo.save(schoolDomain);
   }
 
   async findSchoolDomainById(
@@ -73,6 +73,13 @@ export class SchoolRepository implements ISchoolRepository {
     return await this.schoolDomainRepo.findOne({
       where: { id: schoolDomainId },
     });
+  }
+
+  async getAllDomainsBySchoolId(schoolId: string): Promise<SchoolDomain[]> {
+    const domains = await this.schoolDomainRepo.find({
+      where: { schoolId: schoolId },
+    });
+    return domains;
   }
 
   async updateSchool(school: School): Promise<School> {

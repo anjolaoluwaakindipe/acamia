@@ -36,10 +36,6 @@ export type UpdateSchoolResult = {
   city: string;
   stateOrProvince: string;
   country: string;
-  domains: {
-    id: string;
-    domain: string;
-  }[];
 };
 
 export type AddDomainCommand = {

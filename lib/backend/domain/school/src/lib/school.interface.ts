@@ -52,7 +52,7 @@ export interface ISchoolService {
    * if the school does not exist
    *
    * @throws {NotFoundException}
-   * @param {GetDomainsBySchoolIdQuery} query
+   * @param {GetDomainsBySchoolIdQuery} query - id of the school that the domains belogn to
    */
   getAllDomains(
     query: GetDomainsBySchoolIdQuery
@@ -113,6 +113,13 @@ export interface ISchoolRepository {
    * @param {School} school - This must be an existing school in the database or else a new school will be created
    */
   addDomain(schoolDomain: SchoolDomain, school: School): Promise<SchoolDomain>;
+
+  /**
+   * Gets all domains that belongs to a specific school
+   * @param schoolId - ID of school
+   *
+   * */
+  getAllDomainsBySchoolId(schoolId: string): Promise<SchoolDomain[]>;
 
   /**
    * Get SchoolDomain by id. Returns null if no school domain exists
