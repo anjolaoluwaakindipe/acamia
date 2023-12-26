@@ -1,6 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import {
   AddDomainCommand,
+  AddDomainResult,
   DeleteDomainCommand,
   GetDomainsBySchoolIdQuery,
   GetDomainsBySchoolIdResult,
@@ -79,7 +80,7 @@ export class SchoolService implements ISchoolService {
     };
   }
 
-  async addDomain(command: AddDomainCommand): Promise<void> {
+  async addDomain(command: AddDomainCommand): Promise<AddDomainResult> {
     const existingSchool = await this.schoolRepository.findSchoolById(
       command.schoolId
     );
@@ -92,7 +93,15 @@ export class SchoolService implements ISchoolService {
     const schoolDomain = new SchoolDomain();
     schoolDomain.domain = command.schoolDomain;
 
-    await this.schoolRepository.addDomain(schoolDomain, existingSchool);
+    const domain = await this.schoolRepository.addDomain(
+      schoolDomain,
+      existingSchool
+    );
+
+    return {
+      id: domain.id,
+      domain: domain.domain,
+    };
   }
 
   async getAllDomains(

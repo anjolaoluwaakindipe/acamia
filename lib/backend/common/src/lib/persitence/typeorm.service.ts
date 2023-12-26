@@ -10,17 +10,16 @@ import { Course, Department, School, SchoolDomain } from '@acamia/entities';
     TypeOrmModule.forRootAsync({
       inject: [IAppConfigService],
       useFactory: async (config: IAppConfigService) => {
-        if (config.getNodeEnv() === Environment.Test){
+        if (config.getNodeEnv() === Environment.Test) {
           return {
             type: 'better-sqlite3',
             database: ':memory:',
             dropSchema: true,
-            entities: [School,Course,Department, SchoolDomain],
+            entities: [School, Course, Department, SchoolDomain],
             synchronize: true,
             // logging: true,
             name: 'testConnectioin',
-            
-          }
+          };
         }
         return {
           type: 'postgres',

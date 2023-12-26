@@ -43,6 +43,11 @@ export type AddDomainCommand = {
   schoolDomain: string;
 };
 
+export type AddDomainResult = {
+  id: string;
+  domain: string;
+};
+
 export type GetDomainsBySchoolIdQuery = string;
 
 export type GetDomainsBySchoolIdResult = {
