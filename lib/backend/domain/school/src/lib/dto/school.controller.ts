@@ -71,7 +71,7 @@ export class AddDomainResponse {
   }
 }
 
-export class GetAllDomainsRequest {
+export class GetAllDomainsSchoolIdParam {
   @IsString()
   @IsNotEmpty()
   @IsUUID()
@@ -88,4 +88,11 @@ export class GetAllDomainsResponse {
     instance.domain = param.domain;
     return instance;
   }
+}
+
+export class DeleteDomainDomainIdParam {
+  @IsString()
+  @IsNotEmpty()
+  @IsUUID()
+  domainId: string;
 }

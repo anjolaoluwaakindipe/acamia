@@ -13,7 +13,7 @@ import {
   AddDomainRequest,
   AddDomainResponse,
   DeleteDomainDomainIdParam,
-  GetAllDomainsRequest,
+  GetAllDomainsSchoolIdParam,
   GetAllDomainsResponse,
   SaveSchoolRequest,
   SaveSchoolResponse,
@@ -51,9 +51,9 @@ export class SchoolController {
 
   @Get('/domain/:schoolId')
   async getAllDomains(
-    @Param('schoolId') request: GetAllDomainsRequest
+    @Param('schoolId') schoolId: GetAllDomainsSchoolIdParam
   ): Promise<GetAllDomainsResponse[]> {
-    const result = await this.schoolService.getAllDomains(request.schoolId);
+    const result = await this.schoolService.getAllDomains(schoolId.schoolId);
     const response = result.map((domain) =>
       GetAllDomainsResponse.create({ id: domain.id, domain: domain.domain })
     );
