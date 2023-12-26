@@ -1,6 +1,5 @@
-import { Global, Inject, Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource, EntityManager } from 'typeorm';
 import { Environment, IAppConfigService } from '../config/config.module';
 import { Course, Department, School, SchoolDomain } from '@acamia/entities';
 

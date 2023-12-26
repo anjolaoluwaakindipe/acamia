@@ -1,8 +1,20 @@
-import { Body, Controller, Get, Inject, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ISchoolService } from './school.interface';
 import {
   AddDomainRequest,
   AddDomainResponse,
+  DeleteDomainDomainIdParam,
+  GetAllDomainsRequest,
+  GetAllDomainsResponse,
   SaveSchoolRequest,
   SaveSchoolResponse,
 } from './dto/school.controller';
@@ -35,5 +47,21 @@ export class SchoolController {
     const result = await this.schoolService.addDomain(request);
     const response = AddDomainResponse.create(result);
     return response;
+  }
+
+  @Get('/domain/:schoolId')
+  async getAllDomains(
+    @Param('schoolId') request: GetAllDomainsRequest
+  ): Promise<GetAllDomainsResponse[]> {
+    const result = await this.schoolService.getAllDomains(request.schoolId);
+    const response = result.map((domain) =>
+      GetAllDomainsResponse.create({ id: domain.id, domain: domain.domain })
+    );
+    return response;
+  }
+
+  @Delete('/domain/:domainId')
+  async deleteDomain(@Param('domainId') domainId: DeleteDomainDomainIdParam) {
+    await this.schoolService.deleteDomain(domainId.domainId);
   }
 }

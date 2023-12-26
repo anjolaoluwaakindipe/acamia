@@ -3,6 +3,7 @@ import { School, SchoolDomain } from '@acamia/entities';
 import { Provider } from '@nestjs/common';
 import {
   AddDomainCommand,
+  AddDomainResult,
   DeleteDomainCommand,
   GetDomainsBySchoolIdQuery,
   GetDomainsBySchoolIdResult,
@@ -40,12 +41,13 @@ export interface ISchoolService {
   updateSchool(command: UpdateSchoolCommand): Promise<UpdateSchoolResult>;
 
   /**
-   * Takes a school domain and a school ID and adds that domain to the specific school.
+   * Takes a school domain and a school ID and adds that domain to the specific school, then returns
+   * the saved domain
    * If the school does not exists it will throw a NotFoundException
    * @throws {NotFoundException}
    * @param {AddDomainCommand} command
    */
-  addDomain(command: AddDomainCommand): Promise<void>;
+  addDomain(command: AddDomainCommand): Promise<AddDomainResult>;
 
   /**
    * Gets all domains from a specific school by their school IDs. Throws a NotFoundException

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class SaveSchoolRequest {
   @IsString()
@@ -65,6 +65,25 @@ export class AddDomainResponse {
 
   static create(param: { id: string; domain: string }) {
     const instance = new AddDomainResponse();
+    instance.id = param.id;
+    instance.domain = param.domain;
+    return instance;
+  }
+}
+
+export class GetAllDomainsRequest {
+  @IsString()
+  @IsNotEmpty()
+  @IsUUID()
+  schoolId: string;
+}
+
+export class GetAllDomainsResponse {
+  id: string;
+  domain: string;
+
+  static create(param: { id: string; domain: string }): GetAllDomainsResponse {
+    const instance = new GetAllDomainsResponse();
     instance.id = param.id;
     instance.domain = param.domain;
     return instance;
