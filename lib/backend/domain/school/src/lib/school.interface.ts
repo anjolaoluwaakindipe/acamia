@@ -154,10 +154,7 @@ export const ISchoolRepository = Symbol('ISchoolRepository');
 export function ISchoolServiceProvider(
   param: AppInjectionOptions<ISchoolService>
 ): Provider<ISchoolService> {
-  return {
-    ...param,
-    provide: ISchoolService,
-  };
+  return AppProvider(param, ISchoolService);
 }
 
 /**
@@ -168,8 +165,5 @@ export function ISchoolServiceProvider(
 export function ISchoolRepositoryProvider(
   param: AppInjectionOptions<ISchoolRepository>
 ): Provider<ISchoolRepository> {
-  return {
-    ...param,
-    provide: ISchoolRepository,
-  };
+  return AppProvider(param, ISchoolRepository);
 }
