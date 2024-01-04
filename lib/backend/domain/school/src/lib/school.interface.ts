@@ -1,4 +1,4 @@
-import { AppInjectionOptions } from '@acamia/backend-common';
+import { AppInjectionOptions, AppProvider } from '@acamia/backend-common';
 import { School, SchoolDomain } from '@acamia/entities';
 import { Provider } from '@nestjs/common';
 import {
