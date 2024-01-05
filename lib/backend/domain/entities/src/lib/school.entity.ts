@@ -3,12 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Course } from './course.entity';
-import { SchoolDomain } from './schoolDomain.entity';
 
 export type SchoolCreationObject = {
   id?: string;
@@ -57,9 +57,8 @@ export class School {
   @Column()
   country: string;
 
-  @OneToMany(() => Course, (course) => course.school, 
-  {
-    cascade: ["insert", "update",'remove']
+  @OneToMany(() => Course, (course) => course.school, {
+    cascade: ['insert', 'update', 'remove'],
   })
   courses: Course[];
 
@@ -85,5 +84,37 @@ export class School {
     }
     this.domains.push(schoolDomain);
     schoolDomain.school = this;
+  }
+}
+
+@Entity()
+export class SchoolDomain {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @ManyToOne(() => School, (school) => school.domains, {
+    onDelete: 'CASCADE',
+    orphanedRowAction: 'delete',
+  })
+  school: School;
+
+  @Column({ unique: true })
+  domain: string;
+
+  @Column({ nullable: true })
+  schoolId: string;
+
+  /**
+Creates a new instance of SchoolDomain.
+@param param - The parameters for creating a new instance.
+@param param.id - The id of the school domain.
+@param param.domain - The domain of the school domain.
+@returns The newly created instance of SchoolDomain.
+ */
+  static create(param: { id?: string; domain?: string }) {
+    const newSchoolDomain = new SchoolDomain();
+    newSchoolDomain.id = param?.id || '';
+    newSchoolDomain.domain = param?.domain || '';
+    return newSchoolDomain;
   }
 }
