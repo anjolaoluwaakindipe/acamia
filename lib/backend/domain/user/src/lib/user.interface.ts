@@ -1,6 +1,7 @@
 import { AppInjectionOptions, AppProvider } from '@acamia/backend-common';
 import { User } from '@acamia/entities';
 import { Provider } from '@nestjs/common';
+import { CreateUserCommand, CreateUserResult } from './dto/user.service';
 
 export const IUserService = Symbol('IUserService');
 
@@ -18,7 +19,13 @@ export function IUserRepositoryProvider(
   return AppProvider(param, IUserRepository);
 }
 
-export interface IUserService {}
+/**
+ * IUserService - interface for the user service
+ * */
+export interface IUserService {
+  createUser(command: CreateUserCommand): CreateUserResult;
+  getUserById(query: GetUserByIdQuery): GetUserByIdResult;
+}
 
 /**
  * IUserRepository interface for the user repository

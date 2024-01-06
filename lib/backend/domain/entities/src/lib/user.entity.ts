@@ -35,3 +35,10 @@ export class Role {
   @Column()
   name: string;
 }
+
+export enum RoleTypes {
+  STUDENTS,
+  ADMIN,
+  SUPER_USER,
+  USER,
+}
